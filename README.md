@@ -28,7 +28,7 @@ yarn add msal-vue
 ## Usage
 
 ```ts
-import MsalPlugin from 'msal-vue'
+import { MsalPlugin } from 'msal-vue'
  
 Vue.use(MsalPlugin, {
     auth: {
