@@ -16,7 +16,7 @@ export class MsalLayer {
     private method: string;
     private redirectUri: string | undefined;
 
-    public constructor(config: Configuration, customConfig: { method?: string | undefined; redirectUri?: string | undefined; } | undefined) {
+    public constructor(config: Configuration, customConfig: { method?: string | undefined } | undefined) {
         // msal-vue specific configuration items.
         this.method = customConfig?.method === 'redirect' ? 'redirect' : 'popup' ?? 'popup';
         this.redirectUri = config.auth.redirectUri;
