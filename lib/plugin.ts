@@ -9,8 +9,8 @@ declare module 'vue/types/vue' {
 }
 
 class MsalPlugin {
-    static install(Vue: VueConstructor<Vue>, options: Configuration): void {
-        Vue.prototype.$msal = new MsalLayer(options);
+    static install(Vue: VueConstructor<Vue>, options: Configuration, customConfig: { method?: string | undefined } | undefined): void {
+        Vue.prototype.$msal = new MsalLayer(options, customConfig);
     }
 }
 

@@ -5,15 +5,16 @@
 > By Braedon Wooding
 
 Because the alternatives are pretty mediocre... this is a very simple layer that has;
-- Typescript support
-- Error handling (i.e. if popup fails you can spawn a button to trigger popup, which is more likely to work if you are in some browsers)
-- Amongst just a cleaner implementation with less heavy dependencies (no lodash/axios dependency, only msal-browser)
+
+-   Typescript support
+-   Error handling (i.e. if popup fails you can spawn a button to trigger popup, which is more likely to work if you are in some browsers)
+-   Amongst just a cleaner implementation with less heavy dependencies (no lodash/axios dependency, only msal-browser)
 
 It however, is very lite in terms of extensive features, and doesn't explicitly support things like MSGraph.
 
 ## Installation
 
-Add the msal-vue dependency to your project using yarn or npm.  We require a peer dependency of Vue3.
+Add the msal-vue dependency to your project using yarn or npm. We require a peer dependency of Vue3.
 
 ```
 npm install msal-vue
@@ -28,22 +29,30 @@ yarn add msal-vue
 ## Usage
 
 ```ts
-import { MsalPlugin } from 'msal-vue'
- 
-Vue.use(MsalPlugin, {
-    auth: {
-        clientId: '<client id>',
-        authority: '<url>',
-        redirectUri: '<url>'
+import { MsalPlugin } from 'msal-vue';
+
+Vue.use(
+    MsalPlugin,
+    // MSAL configurations: https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_browser.html#browserconfiguration
+    {
+        auth: {
+            clientId: '<client id>',
+            authority: '<url>',
+            redirectUri: '<url>',
+        },
+        cache: {
+            cacheLocation: 'localStorage', // Options are localStorage, sessionStorage, memoryStorage
+        },
     },
-    cache: {
-        cacheLocation: 'localStorage', // Options are localStorage, sessionStorage, memoryStorage
-    },
-});
- 
+    // Optional msal-vue specific configurations:
+    {
+        method: 'popup', // Options are 'popup' (default) and 'redirect'
+    }
+);
+
 new Vue({
-  // ... vue options as usual
-})
+    // ... vue options as usual
+});
 ```
 
 Configuration is as follows here: [Browser Configuration](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_browser.html#browserconfiguration).
@@ -51,14 +60,23 @@ Configuration is as follows here: [Browser Configuration](https://azuread.github
 To authenticate it's as simple as follows.
 
 ```ts
-// Optional scope set can be passed
-// default is new ScopeSet(['user.read', 'openid', 'profile', 'email']\
+// There are three login options. You really should just use the first one.
+await this.$msal.login();
+// If you want to be explicit, you can use:
 await this.$msal.loginPopup();
-// returns an AuthenticationResult which is a standard type in MSAL
+// or...
+await this.$msal.loginRedirect();
+// Just know that if you have the method set to 'popup' and then call
+// `loginRedirect`, a MsalVueMethodError will be thrown.
+
+// On all the above methods, an optional scope set can be passed
+// default is new ScopeSet(['user.read', 'openid', 'profile', 'email']\
+
+// They all return an AuthenticationResult which is a standard type in MSAL
 // details here: https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_common.html#authenticationresult
 // but most likely you'll just want to access the `account`
 
-// at any time you can request for it to acquire a new token (in case of 401's)
+// At any time you can request for it to acquire a new token (in case of 401's)
 // as follows... takes in an optional scope set
 // default is just new ScopeSet(['user.read']) though
 await this.$msal.acquireToken();
@@ -69,16 +87,16 @@ const user = this.$msal.user();
 
 // are we authenticated?
 if (this.$msal.isAuthenticated()) {
-  // we can finally also forcefully logout
-  this.$msal.logout();
+    // we can finally also forcefully logout
+    this.$msal.logout();
 }
 ```
 
-That covers every bit of functionality in this.  The code itself is also quite readable and overall is just a light layer ontop of msal.
+That covers every bit of functionality in this. The code itself is also quite readable and overall is just a light layer ontop of msal.
 
 ### Advanced Usage
 
-You can access the underlying MSAL library through the `.instance` getter.  This gives you full access to MSAL.
+You can access the underlying MSAL library through the `.instance` getter. This gives you full access to MSAL.
 
 ## Nuxt Usage
 
