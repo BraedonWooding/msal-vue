@@ -1,47 +1,57 @@
 {
-    "name": "msal-vue",
-    "version": "1.0.8",
-    "description": "Vue plugin for MSAL 2 and up",
-    "main": "dist/plugin.js",
-    "types": "dist/plugin.d.ts",
-    "files": ["dist/**", "lib/vue-msal.d.ts"],
-    "scripts": {
-        "build": "tsc"
-    },
-    "keywords": [
-        "vue",
-        "msal",
-        "adal",
-        "authentication",
-        "sso"
-    ],
-    "author": "Braedon Wooding",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/BraedonWooding/msal-vue/issues"
-    },
-    "contributors": [
-        "Braedon Wooding"
-    ],
-    "homepage": "https://github.com/BraedonWooding/msal-vue",
-    "publishConfig": {
-        "access": "public"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/BraedonWooding/msal-vue.git"
-    },
-    "dependencies": {
-        "@azure/msal-browser": "^2.21"
-    },
-    "peerDependencies": {
-        "vue": "^2.x.x"
-    },
-    "devDependencies": {
-        "typescript": "4.5.5",
-        "@vue/runtime-core": "3.2.29"
-    },
-    "directories": {
-        "lib": "lib"
+  "name": "msal-vue",
+  "version": "1.1.0",
+  "description": "Vue plugin for MSAL 2 and up (supports both Vue2 and Vue3)",
+  "main": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "files": [
+    "dist/**",
+    "lib/vue-msal.d.ts"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "vue",
+    "msal",
+    "adal",
+    "authentication",
+    "sso"
+  ],
+  "author": "Braedon Wooding",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BraedonWooding/msal-vue/issues"
+  },
+  "contributors": [
+    "Braedon Wooding"
+  ],
+  "homepage": "https://github.com/BraedonWooding/msal-vue",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BraedonWooding/msal-vue.git"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^2.21",
+    "vue-demi": "^0.14.5"
+  },
+  "peerDependencies": {
+    "vue": "^2.x.x || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
     }
+  },
+  "devDependencies": {
+    "@vue/runtime-core": "3.2.29",
+    "typescript": "4.5.5",
+    "vue": "^3.0.0"
+  },
+  "directories": {
+    "lib": "lib"
+  }
 }

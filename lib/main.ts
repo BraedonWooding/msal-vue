@@ -33,6 +33,17 @@ export class MsalLayer {
     });
   }
 
+  public async loginRedirect(
+    scopes: ScopeSet = new ScopeSet(["user.read", "openid", "profile", "email"])
+  ): Promise<AuthenticationResult | null> {
+    const response = await this.msalInstance.handleRedirectPromise();
+    await this.msalInstance.loginRedirect({
+      scopes: scopes.asArray(),
+      prompt: "select_account",
+    });
+    return response;
+  }
+
   public async logout(): Promise<void> {
     return await this.msalInstance.logoutPopup();
   }

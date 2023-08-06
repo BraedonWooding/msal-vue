@@ -1,6 +1,6 @@
 # msal-vue
 
-> MSAL Layer for VueJS
+> MSAL Layer for Vue2 and Vue3
 
 > By Braedon Wooding
 
@@ -25,11 +25,15 @@ or
 yarn add msal-vue
 ```
 
+> We support both Vue2 & Vue3 through the library [vue-demi](https://github.com/vueuse/vue-demi), so there is no code changes required to support either.
+
 ## Usage
+
+### Vue2
 
 ```ts
 import { MsalPlugin } from 'msal-vue'
- 
+
 Vue.use(MsalPlugin, {
     auth: {
         clientId: '<client id>',
@@ -40,10 +44,34 @@ Vue.use(MsalPlugin, {
         cacheLocation: 'localStorage', // Options are localStorage, sessionStorage, memoryStorage
     },
 });
- 
+
 new Vue({
   // ... vue options as usual
 })
+```
+
+### Vue3
+
+```ts
+import App from "./App.vue";
+import { createApp } from "vue";
+import { MsalPlugin } from 'msal-vue'
+
+const app = createApp(App);
+// ...
+
+app.use(MsalPlugin, {
+    auth: {
+        clientId: '<client id>',
+        authority: '<url>',
+        redirectUri: '<url>'
+    },
+    cache: {
+        cacheLocation: 'localStorage', // Options are localStorage, sessionStorage, memoryStorage
+    },
+});
+
+app.mount("#app");
 ```
 
 Configuration is as follows here: [Browser Configuration](https://azuread.github.io/microsoft-authentication-library-for-js/ref/modules/_azure_msal_browser.html#browserconfiguration).
