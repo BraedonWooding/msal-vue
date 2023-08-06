@@ -8,8 +8,14 @@
         "declaration": true,
         "forceConsistentCasingInFileNames": true,
         "outDir": "dist",
-        "typeRoots": ["lib", "lib/src"]
+        "typeRoots": [
+            "lib",
+            "lib/src"
+        ]
     },
+    "include": [
+        "lib/plugin.d.ts"
+    ],
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "Recommended"
 }
